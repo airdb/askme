@@ -2,8 +2,8 @@ package main
 
 import (
 	"log"
-	"time"
 	"net/http"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
@@ -48,6 +48,10 @@ func main() {
 	go updateMsg()
 	router := gin.Default()
 	router.GET("/ws", func(c *gin.Context) {
+		echo(c.Writer, c.Request)
+	})
+
+	router.GET("/socket.io/", func(c *gin.Context) {
 		echo(c.Writer, c.Request)
 	})
 	router.Run(":8999")
