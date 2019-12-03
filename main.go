@@ -54,5 +54,5 @@ func main() {
 	router.GET("/socket.io/", func(c *gin.Context) {
 		echo(c.Writer, c.Request)
 	})
-	router.Run(":8999")
+	router.Run("127.0.0.1:8999")
 }

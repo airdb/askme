@@ -53,5 +53,6 @@ func main() {
 	// router.POST("/socket.io/*any", gin.WrapH(server))
 	router.StaticFS("/public", http.Dir("public"))
 
-	router.Run(":8999")
+	log.Println("http://localhost:8999/public/")
+	router.Run("localhost:8999")
 }
