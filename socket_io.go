@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	socketio "github.com/googollee/go-socket.io"
 	"log"
+	"net/http"
 )
 
 func main() {
@@ -26,7 +27,7 @@ func main() {
 		fmt.Println("notice:", msg)
 		s.Emit("reply", "have "+msg)
 	})
-	server.OnEvent("/chat", "message", func(s socketio.Conn, msg string) string {
+	server.OnEvent("/chat", "msg", func(s socketio.Conn, msg string) string {
 		fmt.Println("bbb")
 		s.SetContext(msg)
 		return "recv " + msg
@@ -50,7 +51,7 @@ func main() {
 
 	router.GET("/socket.io/*any", gin.WrapH(server))
 	// router.POST("/socket.io/*any", gin.WrapH(server))
-
+	router.StaticFS("/public", http.Dir("public"))
 
 	router.Run(":8999")
 }
